@@ -8,17 +8,21 @@ var objects;
     var Enemy = (function (_super) {
         __extends(Enemy, _super);
         function Enemy(imageString, life) {
-            _super.call(this, enemyAtlas, imageString, "");
+            _super.call(this, imageString, "poof");
             this._life = life;
+            this.name = "robber";
         }
         Object.defineProperty(Enemy.prototype, "life", {
             get: function () {
+                this._life = 1;
                 return this._life;
             },
             enumerable: true,
             configurable: true
         });
         Enemy.prototype.update = function () {
+            _super.prototype.update.call(this);
+            this.getPosition();
         };
         Enemy.prototype.setPosition = function (pos) {
             this.x = pos.x;
@@ -29,9 +33,13 @@ var objects;
         };
         Enemy.prototype.shot = function () {
             this._life--;
+            if (this._life = 0) {
+                this._dead();
+            }
         };
         Enemy.prototype._dead = function () {
             currentScene.removeChild(this);
+            this.update();
         };
         return Enemy;
     }(objects.GameObject));

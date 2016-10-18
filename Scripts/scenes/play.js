@@ -12,6 +12,10 @@ var scenes;
             this.start();
         }
         Play.prototype.start = function () {
+            createjs.Ticker.getMeasuredTickTime();
+            createjs.Ticker.on("tick", gameLoop, this);
+            this._tickLbl = new objects.Label("counter: " + this._tick, "25px Consolar", "#000000", config.Screen.HEIGHT - 50, config.Screen.WIDTH - 50);
+            this.addChild(this._tickLbl);
             // Add menu scene to global stage container
             this._playBG = new createjs.Bitmap(assets.getResult("PlayBG"));
             this.addChildAt(this._playBG, 0);
@@ -20,6 +24,7 @@ var scenes;
             var bounds = blurFilter.getBounds();
             var bitmapBounds = this._playBG.getBounds();
             this._playBG.cache(bounds.x, bounds.y, bitmapBounds.width, bitmapBounds.height);
+            this._robber = new objects.Enemy("robber", 5);
             stage.addChild(this);
         };
         Play.prototype.update = function () {

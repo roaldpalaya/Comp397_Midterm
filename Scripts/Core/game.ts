@@ -7,6 +7,9 @@ var stage: createjs.Stage;
 
 var currentScene : objects.Scene;
 var scene: number;
+var spriteSheetLoader : createjs.SpriteSheetLoader;
+var robberAtlas : createjs.SpriteSheet;
+
 
 // Preload Assets required
 var assetData:objects.Asset[] = [
@@ -32,8 +35,44 @@ function init() {
     createjs.Ticker.setFPS(config.Game.FPS);
     createjs.Ticker.on("tick", this.gameLoop, this);
 
+    
+    let atlasData={
+
+"images": [
+    "../Assets/images/robber.png"
+],
+
+"frames": [
+    [1, 1, 200, 214, 0, 0, 0],
+    [203, 1, 128, 125, 0, 0, -3],
+    [203, 128, 102, 117, 0, -13, -9],
+    [307, 128, 91, 98, 0, -18, -18],
+    [400, 1, 128, 124, 0, 0, -4],
+    [400, 127, 128, 124, 0, 0, -4]
+],
+
+"animations": {
+    "poof":{
+        "frames": [1,2,3,4,5], "speed":0.1, next: false
+    },
+    "robber": { "frames": [0] },
+    "poof2": { "frames": [1] },
+    "poof4": { "frames": [2] },
+    "poof5": { "frames": [3] },
+    "poof1": { "frames": [4] },
+    "poof3": { "frames": [5] }
+},
+
+"texturepacker": [
+        "SmartUpdateHash: $TexturePacker:SmartUpdate:6b44ef51929ea21e17ff1b07ec9c1090:a443013636a6d3e24441fc0f2a91ca43:a99356c10d69482e9bee53d25c3d05e1$",
+        "Created with TexturePacker (https://www.codeandweb.com/texturepacker) for EaselJS"
+]
+
+    }
+    robberAtlas= new createjs.SpriteSheet(atlasData);
     scene = config.Scene.MENU;
     changeScene();
+
 }
 
 function gameLoop(event: createjs.Event): void {

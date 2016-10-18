@@ -13,15 +13,20 @@ module objects {
         public center:objects.Vector2;
 
         constructor(imageString:string, life : number) {
-            super(enemyAtlas, imageString, "");
+            super( imageString, "poof" );
             this._life = life;
+            this.name="robber";
+
         }
 
         get life() : number {
+            this._life= 1;
             return this._life;
         }
 
         public update() : void {
+            super.update();
+            this.getPosition();
         }
 
         public setPosition(pos : objects.Vector2) : void {
@@ -35,10 +40,14 @@ module objects {
 
         public shot() : void {
             this._life--;
+            if (this._life=0){
+                this._dead();
+            }
         }
 
         private _dead() : void {
             currentScene.removeChild(this);
+            this.update();
         }
     }
 }

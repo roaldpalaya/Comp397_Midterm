@@ -7,8 +7,9 @@ var objects;
 (function (objects) {
     var GameObject = (function (_super) {
         __extends(GameObject, _super);
-        function GameObject(atlas, imageString, deathAnimString) {
-            _super.call(this, atlas, imageString);
+        function GameObject(imageString, deathAnimString) {
+            _super.call(this, robberAtlas, imageString);
+            this._deathAnim = deathAnimString;
             this._initialize(imageString);
             this.start();
         }

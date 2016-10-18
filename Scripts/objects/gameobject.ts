@@ -4,7 +4,7 @@ module objects {
         private _height:number;
         private _name:string;
         private _position:Vector2;
-
+        private _deathAnim:string;
         // PUBLIC PROPERTIES
         get width() : number {
             return this._width
@@ -38,9 +38,9 @@ module objects {
             this._position = p;
         }
 
-        constructor(atlas: createjs.SpriteSheet, imageString : string, deathAnimString) {
-            super(atlas, imageString);
-
+        constructor(imageString : string, deathAnimString) {
+            super(robberAtlas, imageString);
+            this._deathAnim = deathAnimString;
             this._initialize(imageString);
             this.start();
         }
