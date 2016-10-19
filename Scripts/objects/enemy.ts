@@ -20,7 +20,7 @@ module objects {
         }
 
         get life() : number {
-            this._life= 1;
+            
             return this._life;
         }
 
@@ -30,8 +30,8 @@ module objects {
         }
 
         public setPosition(pos : objects.Vector2) : void {
-            this.x = pos.x;
-            this.y = pos.y;
+            this.x = Math.floor(Math.random()* 600)+this.width ;
+            this.y = Math.floor(Math.random()* 400)+this.height;
         }
 
         public getPosition() : objects.Vector2 {

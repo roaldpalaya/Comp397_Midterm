@@ -14,7 +14,6 @@ var objects;
         }
         Object.defineProperty(Enemy.prototype, "life", {
             get: function () {
-                this._life = 1;
                 return this._life;
             },
             enumerable: true,
@@ -25,8 +24,8 @@ var objects;
             this.getPosition();
         };
         Enemy.prototype.setPosition = function (pos) {
-            this.x = pos.x;
-            this.y = pos.y;
+            this.x = Math.floor(Math.random() * 600) + this.width;
+            this.y = Math.floor(Math.random() * 400) + this.height;
         };
         Enemy.prototype.getPosition = function () {
             return new objects.Vector2(this.x, this.y);
